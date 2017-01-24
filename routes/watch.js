@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var chokidar = require('chokidar');
-var watch = require('node-watch');
+// var watch = require('node-watch');
 var mime = require('mime');
 var s3 = require('../aws');
-
-var gaze = require('gaze');
+//
+// var gaze = require('gaze');
 var bucket = "restfulapiexamplebucket";
 
-var WatchIO = require('watch.io'),
-    watcher = new WatchIO();
+// var WatchIO = require('watch.io'),
+//     watcher = new WatchIO();
 var util = require("util");
 
 router.get('/', function(req, res, next)
@@ -42,35 +42,16 @@ router.get('/', function(req, res, next)
           //  if (stats) console.log('File ' + path + 'changed size to ' + stats.size);
         });
 
-        // .on('raw', function(event, path, details) {
-        //     //
-        //     // if(event == 'rename') {
-        //     //
-        //     //   //  console.log('rename!!'+ event + " " + path +  " " + details);
-        //     // }
-        //
-        //
-        //     console.log('Raw event info:', event, path, details);
-        // });
-
    // watcher.close();
 
     res.render('watch', { title: 'File Storage' });
-
-
-
 });
 
 
 function addToBucket(path, mime, bucket)
 {
     var split_path = path.split("/");
-    console.log(split_path);
     var file_name = split_path[split_path.length - 1];
-
-    console.log("FILRNAME: " + file_name);
-    console.log("MIME: " + mime);
-
 
     fs.readFile(path, function (err, data)
     {
@@ -92,19 +73,13 @@ function addToBucket(path, mime, bucket)
             }
         });
     });
-
 }
 
 
-function deleteFromBucket(path) {
-
+function deleteFromBucket(path)
+{
     var split_path = path.split("/");
-
     var file_name = split_path[split_path.length - 1];
-
-    console.log(split_path);
-    console.log(file_name);
-
 
     fs.readFile(path, function(err,data)
     {
