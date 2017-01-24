@@ -7,13 +7,6 @@ var s3 = require('../aws');
 var bucket = "restfulapiexamplebucket";
 var util = require("util");
 
-
-router.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept");
-    next();
-});
-
 router.get('/', function(req, res, next)
 {
     var params = {
